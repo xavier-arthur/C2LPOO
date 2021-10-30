@@ -14,7 +14,6 @@ public class DespesaTotal implements Despesa {
         this.lista.forEach(elem -> callback.accept(elem));
     }
 
-
     @Override // TODO:
     public String toString() {
         var builder = new StringBuilder();
