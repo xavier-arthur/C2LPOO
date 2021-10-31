@@ -45,6 +45,6 @@ public class DespesaDia {
 
     @Override
     public String toString() {
-        return String.format("%s | %s | %.2f\n", this.dia, this.mes, this.valor).trim();
+        return String.format("%02d/%02d | TOTAL: %.2f\n", this.dia, this.mes, this.valor);
     }
 }

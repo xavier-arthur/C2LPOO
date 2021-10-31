@@ -8,8 +8,4 @@ public class Tests {
 
        d.forEach(Tests::test);
     }
-
-    static void test(DespesaDia d) {
-        System.out.println(d);
-    }
 }

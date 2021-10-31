@@ -41,12 +41,8 @@ public class DespesaTotal implements Despesa {
         for (int i = 0; i < this.lista.size(); i++) {
             var atual = this.lista.get(i);
 
-            if ((atual.getDia() == dOld.getDia()) 
-                && (atual.getMes() == dOld.getMes()) 
-                && (atual.getValor() == dOld.getValor())) 
-            {
+            if (atual.equals(dOld))
                 this.lista.remove(i);
-            }
         }
     }
 

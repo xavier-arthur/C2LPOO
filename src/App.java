@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 public class App {
 
@@ -15,7 +16,7 @@ public class App {
                 + "3 – Total Parcial\n"
                 + "4 – Total\n"
                 + "5 – Sair\n\n"
-                + "Escolha:"
+                + "Escolha: "
             );
 
             System.out.printf(
@@ -24,7 +25,7 @@ public class App {
                     case 2 -> estornar();
                     case 3 -> totParcial();
                     case 4 -> totGeral();
-                    case 5 -> "Adeus. . .";
+                    case 5 -> "Adeus. . .\n";
                     default -> "Digite um numero entre 1 e 5!";
                 }
             );
@@ -32,7 +33,7 @@ public class App {
         } while (choice != 5);
     }
 
-    static String cadastrar() {
+    static DespesaDia instancia() {
         System.out.printf("Insira o dia: ");
         var dia = scan.nextInt();
 
@@ -42,36 +43,37 @@ public class App {
         System.out.printf("Insira o valor: ");
         var valor = scan.nextFloat();
 
-        dt.acrescenta(new DespesaDia(dia, mes, valor));
+        return new DespesaDia(dia, mes, valor);
+    }
 
+    static String cadastrar() {
+        dt.acrescenta(instancia());
         return "\nDespesa Adicionanda\n\n";
     };
 
     static String estornar() {
+        var old = instancia();
+        dt.estorna(old);
+
+        return String.format(
+            "\nTodas despesas do dia %s/%s no valor de %.2f foram estornadas!\n\n",
+            old.getDia(),
+            old.getMes(),
+            old.getValor()
+        );
+    };
+
+    static String totParcial() {
         System.out.printf("Insira o dia: ");
         var dia = scan.nextInt();
 
         System.out.printf("Insira o mes: ");
         var mes = scan.nextInt();
 
-        System.out.printf("Insira o valor: ");
-        var valor = scan.nextFloat();
-
-        dt.estorna(new DespesaDia(dia, mes, valor));
-
-        return String.format(
-            "\nTodas despesas do dia %s/%s no valor de %.2f foram estornadas!\n",
-            dia,
-            mes,
-            valor
-        );
-    };
-
-    static String totParcial() {
-        return "todo";
+        return String.format("\n%s\n", dt.get(dia, mes).toString());
     };
 
     static String totGeral() {
-        return String.format("O total do valor das despesas eh: %.2f", dt.totaliza());
+        return String.format("\nO total do valor das despesas eh: %.2f\n\n", dt.totaliza());
     };
 }
